@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Planning — Questionário Criteria</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:  #0D2240;
+  --blue:  #1B6CA8;
+  --light: #4A90C4;
+  --sky:   #EBF4FB;
+  --white: #FFFFFF;
+  --g1:    #F5F7FA;
+  --g2:    #E8ECF1;
+  --g3:    #B0BEC5;
+  --g4:    #546E7A;
+  --text:  #1A2B3C;
+  --green: #1E7D4F;
+  --lgreen:#E8F5ED;
+  --red:   #C62828;
+  --lred:  #FFEBEE;
+  --gold:  #C9A84C;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--g1); color: var(--text); min-height: 100vh; }
+
+/* ── HEADER ── */
+.header {
+  background: var(--navy);
+  padding: 0;
+  position: sticky; top: 0; z-index: 100;
+}
+.header-inner {
+  max-width: 760px; margin: 0 auto;
+  padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-mark {
+  width: 28px; height: 28px;
+  border: 2px solid var(--light);
+  border-right-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-30deg);
+}
+.logo-text .name { font-size: 16px; font-weight: 500; color: #fff; }
+.logo-text .sub { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--light); }
+.progress-wrap { display: flex; align-items: center; gap: 10px; }
+.progress-label { font-size: 11px; color: rgba(255,255,255,0.5); }
+.progress-track { width: 120px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; }
+.progress-fill { height: 100%; background: var(--light); border-radius: 2px; transition: width .4s ease; }
+
+/* ── COVER ── */
+.cover {
+  background: var(--navy);
+  padding: 64px 32px 56px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  border: 1px solid rgba(74,144,196,0.12);
+  border-radius: 50%;
+}
+.cover-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--light); margin-bottom: 16px;
+}
+.cover-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px; font-weight: 300; color: #fff; line-height: 1.0;
+  margin-bottom: 6px;
+}
+.cover-title span { color: var(--light); font-weight: 600; }
+.cover-subtitle {
+  font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.5);
+  margin-bottom: 32px;
+}
+.cover-info {
+  display: inline-flex; gap: 28px;
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 14px 28px;
+  font-size: 12px; color: rgba(255,255,255,0.6);
+}
+.cover-info span strong { color: rgba(255,255,255,0.9); display: block; font-size: 13px; margin-bottom: 2px; }
+
+/* ── CONTAINER ── */
+.container { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+
+/* ── SECTION CARD ── */
+.section-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 0.5px solid var(--g2);
+  margin-bottom: 24px;
+  overflow: hidden;
+  display: none;
+}
+.section-card.active { display: block; animation: fadeIn .3s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.section-header {
+  display: flex; align-items: stretch;
+  border-bottom: 0.5px solid var(--g2);
+}
+.sh-num {
+  background: var(--navy); color: #fff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 300;
+  padding: 16px 20px;
+  display: flex; align-items: center; min-width: 60px; justify-content: center;
+}
+.sh-body { padding: 16px 20px; flex: 1; }
+.sh-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .06em; }
+.sh-subtitle { font-size: 12px; color: var(--g4); }
+
+.section-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 20px; }
+
+/* ── FIELD ── */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-row { display: grid; gap: 16px; }
+.field-row-2 { grid-template-columns: 1fr 1fr; }
+.field-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+label {
+  font-size: 12px; font-weight: 600; color: var(--navy);
+  text-transform: uppercase; letter-spacing: .05em;
+}
+label .req { color: var(--red); margin-left: 2px; }
+label .opt { color: var(--g3); font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: 4px; }
+input[type="text"], input[type="email"], input[type="tel"], input[type="number"],
+input[type="date"], select, textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--g2);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--g1);
+  transition: border-color .2s, background .2s;
+  outline: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--blue);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(27,108,168,0.1);
+}
+textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23546E7A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+.field-hint { font-size: 11px; color: var(--g4); line-height: 1.5; }
+
+/* ── RADIO / CHECK GROUP ── */
+.options-grid { display: flex; flex-direction: column; gap: 8px; }
+.options-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.opt-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--g2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+  background: var(--g1);
+}
+.opt-item:hover { border-color: var(--blue); background: var(--sky); }
+.opt-item input { margin-top: 2px; accent-color: var(--blue); flex-shrink: 0; }
+.opt-label { font-size: 13px; color: var(--text); line-height: 1.4; }
+.opt-label strong { display: block; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+
+/* ── REPEATABLE ── */
+.repeat-group { display: flex; flex-direction: column; gap: 12px; }
+.repeat-item {
+  background: var(--g1);
+  border: 0.5px solid var(--g2);
+  border-radius: 8px;
+  padding: 16px;
+  position: relative;
+}
+.repeat-remove {
+  position: absolute; top: 10px; right: 12px;
+  background: none; border: none;
+  font-size: 16px; color: var(--g3);
+  cursor: pointer; padding: 2px 6px;
+  border-radius: 4px;
+}
+.repeat-remove:hover { color: var(--red); background: var(--lred); }
+.add-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 16px;
+  border: 1px dashed var(--blue);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--blue);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background .2s;
+}
+.add-btn:hover { background: var(--sky); }
+
+/* ── NAV ── */
+.nav-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 0 0;
+  gap: 12px;
+}
+.btn {
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  border: none; transition: all .2s;
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--g4);
+  border: 1px solid var(--g2);
+}
+.btn-secondary:hover { background: var(--g1); }
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--navy); }
+.btn-submit {
+  background: var(--green);
+  color: #fff;
+  padding: 14px 40px;
+  font-size: 15px;
+}
+.btn-submit:hover { background: #0f5c38; }
+
+/* ── STEPS DOT ── */
+.steps-dots {
+  display: flex; gap: 6px; align-items: center;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--g2);
+  transition: all .2s;
+  cursor: pointer;
+}
+.dot.active { background: var(--blue); transform: scale(1.2); }
+.dot.done { background: var(--green); }
+
+/* ── SUCCESS ── */
+.success-screen {
+  display: none;
+  text-align: center; padding: 60px 20px;
+}
+.success-screen.show { display: block; }
+.success-icon {
+  width: 64px; height: 64px;
+  background: var(--lgreen);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin: 0 auto 24px;
+}
+.success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 600; color: var(--navy); margin-bottom: 12px;
+}
+.success-text { font-size: 14px; color: var(--g4); line-height: 1.7; max-width: 460px; margin: 0 auto 32px; }
+.copy-box {
+  background: var(--g1); border: 1px solid var(--g2);
+  border-radius: 8px; padding: 16px 20px;
+  font-size: 12px; color: var(--text);
+  text-align: left; max-height: 320px; overflow-y: auto;
+  white-space: pre-wrap; line-height: 1.7;
+  margin-bottom: 16px;
+}
+.copy-btn {
+  background: var(--blue); color: #fff;
+  border: none; padding: 10px 24px;
+  border-radius: 6px; font-size: 13px; font-weight: 500;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+}
+.copy-btn:hover { background: var(--navy); }
+
+/* ── SEND BUTTONS ── */
+.send-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 14px 24px;
+  border-radius: 8px; border: none;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all .2s;
+}
+.send-whatsapp { background: #25D366; color: #fff; }
+.send-whatsapp:hover { background: #1da851; }
+.send-copy { background: var(--blue); color: #fff; }
+.send-copy:hover { background: var(--navy); }
+.send-email { background: var(--g1); color: var(--text); border: 1px solid var(--g2) !important; }
+.send-email:hover { background: var(--sky); border-color: var(--blue) !important; }
+
+/* ── SEND BUTTONS ── */
+@media (max-width: 600px) {
+  .field-row-2, .field-row-3 { grid-template-columns: 1fr; }
+  .options-grid-2 { grid-template-columns: 1fr; }
+  .cover-title { font-size: 38px; }
+  .cover-info { flex-direction: column; gap: 12px; }
+  .section-body { padding: 18px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark"></div>
+      <div class="logo-text">
+        <div class="name">Criteria</div>
+        <div class="sub">Financial Group</div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <span class="progress-label" id="progress-label">Seção 1 de 9</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:11%"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Questionário Financeiro Personalizado</div>
+  <div class="cover-title">Financial<br><span>Planning</span></div>
+  <div class="cover-subtitle">Criteria Financial Group · Estevão Foletto · ANCORD A38282</div>
+  <div class="cover-info">
+    <span><strong>Confidencial</strong>LGPD — Lei 13.709/2018</span>
+    <span><strong>~15 minutos</strong>para preencher</span>
+    <span><strong>9 seções</strong>de perguntas</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══ SEÇÃO 1 — DADOS PESSOAIS ══ -->
+<div class="section-card active" id="sec-1">
+  <div class="section-header">
+    <div class="sh-num">01</div>
+    <div class="sh-body">
+      <div class="sh-title">Dados Pessoais e Perfil</div>
+      <div class="sh-subtitle">Identificação, formação e perfil de risco</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Nome completo<span class="req">*</span></label>
+        <input type="text" id="nome" placeholder="Ex: João Carlos Ferreira">
+      </div>
+      <div class="field">
+        <label>Data de nascimento<span class="req">*</span></label>
+        <input type="date" id="nascimento">
+      </div>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>CPF<span class="req">*</span></label>
+        <input type="text" id="cpf" placeholder="000.000.000-00">
+      </div>
+      <div class="field">
+        <label>Estado civil<span class="req">*</span></label>
+        <select id="estado_civil">
+          <option value="">Selecione...</option>
+          <option>Solteiro(a)</option>
+          <option>Casado(a)</option>
+          <option>União Estável</option>
+          <option>Divorciado(a)</option>
+          <option>Viúvo(a)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Telefone / WhatsApp<span class="req">*</span></label>
+        <input type="tel" id="telefone" placeholder="(27) 99999-9999">
+      </div>
+      <div class="field">
+        <label>E-mail<span class="req">*</span></label>
+        <input type="email" id="email" placeholder="seu@email.com">
+      </div>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Cidade / Estado<span class="req">*</span></label>
+        <input type="text" id="cidade" placeholder="Ex: Vitória – ES">
+      </div>
+      <div class="field">
+        <label>Profissão / Ocupação<span class="req">*</span></label>
+        <input type="text" id="profissao" placeholder="Ex: Médico, Empresário">
+      </div>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Empresa / Empregador<span class="opt">(opcional)</span></label>
+        <input type="text" id="empresa" placeholder="Ex: Ferreira Indústrias Ltda.">
+      </div>
+      <div class="field">
+        <label>Regime de trabalho<span class="req">*</span></label>
+        <select id="regime">
+          <option value="">Selecione...</option>
+          <option>CLT</option>
+          <option>PJ / Autônomo</option>
+          <option>Profissional Liberal</option>
+          <option>Empresário / Sócio</option>
+          <option>Servidor Público</option>
+          <option>Aposentado</option>
+          <option>Outro</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Renda bruta mensal estimada (R$)<span class="req">*</span></label>
+      <input type="number" id="renda" placeholder="Ex: 25000">
+      <span class="field-hint">Informe o valor bruto antes de impostos e descontos.</span>
+    </div>
+
+    <div class="field">
+      <label>Perfil de risco (Suitability)<span class="req">*</span></label>
+      <div class="options-grid">
+        <label class="opt-item"><input type="radio" name="perfil" value="Conservador"><span class="opt-label"><strong>Conservador</strong>Priorizo a preservação do capital. Aceito rendimento menor para menor volatilidade.</span></label>
+        <label class="opt-item"><input type="radio" name="perfil" value="Moderado"><span class="opt-label"><strong>Moderado</strong>Aceito alguma oscilação para buscar rentabilidade acima da renda fixa.</span></label>
+        <label class="opt-item"><input type="radio" name="perfil" value="Arrojado"><span class="opt-label"><strong>Arrojado</strong>Aceito oscilações significativas para maximizar o retorno no longo prazo.</span></label>
+        <label class="opt-item"><input type="radio" name="perfil" value="Agressivo"><span class="opt-label"><strong>Agressivo</strong>Aceito alta volatilidade e riscos elevados em busca de retorno máximo.</span></label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 2 — CÔNJUGE ══ -->
+<div class="section-card" id="sec-2">
+  <div class="section-header">
+    <div class="sh-num">02</div>
+    <div class="sh-body">
+      <div class="sh-title">Cônjuge e Dependentes</div>
+      <div class="sh-subtitle">Informações do cônjuge e filhos</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Nome do cônjuge / companheiro(a)<span class="opt">(se aplicável)</span></label>
+        <input type="text" id="conjuge_nome" placeholder="Ex: Maria Clara Ferreira">
+      </div>
+      <div class="field">
+        <label>Data de nascimento<span class="opt">(se aplicável)</span></label>
+        <input type="date" id="conjuge_nasc">
+      </div>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Profissão do cônjuge<span class="opt">(opcional)</span></label>
+        <input type="text" id="conjuge_prof" placeholder="Ex: Advogada">
+      </div>
+      <div class="field">
+        <label>Renda bruta mensal do cônjuge (R$)<span class="opt">(opcional)</span></label>
+        <input type="number" id="conjuge_renda" placeholder="Ex: 18000">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Filhos / outros dependentes<span class="opt">(opcional)</span></label>
+      <div class="repeat-group" id="filhos-list">
+        <div class="repeat-item">
+          <div class="field-row field-row-3">
+            <div class="field"><label>Nome</label><input type="text" placeholder="Ex: Lucas"></div>
+            <div class="field"><label>Data de nasc.</label><input type="date"></div>
+            <div class="field"><label>Parentesco</label><select><option>Filho(a)</option><option>Enteado(a)</option><option>Outro</option></select></div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="add-btn" onclick="addFilho()">+ Adicionar dependente</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 3 — RECEITAS ══ -->
+<div class="section-card" id="sec-3">
+  <div class="section-header">
+    <div class="sh-num">03</div>
+    <div class="sh-body">
+      <div class="sh-title">Receitas e Fluxo de Caixa</div>
+      <div class="sh-subtitle">Fontes de renda ativa, passiva e previsões</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="field">
+      <label>Fontes de renda ativa até a aposentadoria<span class="req">*</span></label>
+      <div class="repeat-group" id="receitas-list">
+        <div class="repeat-item">
+          <div class="field-row field-row-3">
+            <div class="field"><label>Tipo de receita</label><input type="text" placeholder="Ex: Salário CLT, Pró-labore"></div>
+            <div class="field"><label>Valor bruto (R$)</label><input type="number" placeholder="Ex: 25000"></div>
+            <div class="field"><label>Periodicidade</label><select><option>Mensal</option><option>Anual</option><option>Trimestral</option><option>Variável</option></select></div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="add-btn" onclick="addReceita()">+ Adicionar fonte de renda</button>
+    </div>
+
+    <div class="field">
+      <label>Receitas passivas<span class="opt">(opcional)</span></label>
+      <textarea id="rec_passiva" placeholder="Ex: Aluguel de imóvel — R$ 4.000/mês&#10;Dividendos — R$ 1.200/mês"></textarea>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Benefício estimado do INSS (R$)<span class="opt">(opcional)</span></label>
+        <input type="number" id="inss" placeholder="Ex: 1412">
+      </div>
+      <div class="field">
+        <label>Outras receitas relevantes<span class="opt">(opcional)</span></label>
+        <input type="text" id="outras_rec" placeholder="Ex: Bônus anual R$ 40k">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 4 — DESPESAS ══ -->
+<div class="section-card" id="sec-4">
+  <div class="section-header">
+    <div class="sh-num">04</div>
+    <div class="sh-body">
+      <div class="sh-title">Despesas e Orçamento</div>
+      <div class="sh-subtitle">Despesas mensais fixas, variáveis e temporárias</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="field">
+      <label>Despesas fixas mensais<span class="req">*</span></label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="field"><label>Moradia (aluguel / condomínio / IPTU)</label><input type="number" id="desp_moradia" placeholder="R$"></div>
+        <div class="field"><label>Alimentação (mercado + restaurantes)</label><input type="number" id="desp_alim" placeholder="R$"></div>
+        <div class="field"><label>Transporte (combustível / Uber)</label><input type="number" id="desp_transp" placeholder="R$"></div>
+        <div class="field"><label>Saúde (plano + medicamentos)</label><input type="number" id="desp_saude" placeholder="R$"></div>
+        <div class="field"><label>Educação (escolas / cursos)</label><input type="number" id="desp_educ" placeholder="R$"></div>
+        <div class="field"><label>Telefone / Internet / Streaming</label><input type="number" id="desp_tele" placeholder="R$"></div>
+        <div class="field"><label>Funcionários domésticos</label><input type="number" id="desp_dom" placeholder="R$"></div>
+        <div class="field"><label>Outras despesas fixas</label><input type="number" id="desp_outras" placeholder="R$"></div>
+      </div>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Total estimado de despesas variáveis / lazer (R$)<span class="opt">(opcional)</span></label>
+        <input type="number" id="desp_var" placeholder="Ex: 3500">
+        <span class="field-hint">Compras, viagens, academia, entretenimento.</span>
+      </div>
+      <div class="field">
+        <label>Despesas temporárias previstas<span class="opt">(opcional)</span></label>
+        <input type="text" id="desp_temp" placeholder="Ex: Reforma R$ 60k em 2025">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 5 — FINANCIAMENTOS ══ -->
+<div class="section-card" id="sec-5">
+  <div class="section-header">
+    <div class="sh-num">05</div>
+    <div class="sh-body">
+      <div class="sh-title">Financiamentos e Dívidas</div>
+      <div class="sh-subtitle">Imóvel, consórcio e outras dívidas</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="field">
+      <label>Possui financiamento imobiliário ativo?<span class="req">*</span></label>
+      <div class="options-grid-2">
+        <label class="opt-item"><input type="radio" name="tem_financ" value="Sim"><span class="opt-label">Sim</span></label>
+        <label class="opt-item"><input type="radio" name="tem_financ" value="Não"><span class="opt-label">Não</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Se sim, detalhes do financiamento<span class="opt">(opcional)</span></label>
+      <div class="repeat-group">
+        <div class="repeat-item">
+          <div class="field-row field-row-3">
+            <div class="field"><label>Banco</label><input type="text" id="fin_banco" placeholder="Ex: Caixa Econômica"></div>
+            <div class="field"><label>Saldo devedor (R$)</label><input type="number" id="fin_saldo" placeholder="Ex: 380000"></div>
+            <div class="field"><label>Parcela atual (R$)</label><input type="number" id="fin_parcela" placeholder="Ex: 4800"></div>
+          </div>
+          <div class="field-row field-row-3" style="margin-top:10px">
+            <div class="field"><label>Taxa de juros (% a.a.)</label><input type="number" id="fin_taxa" placeholder="Ex: 9.5" step="0.1"></div>
+            <div class="field"><label>Parcelas restantes</label><input type="number" id="fin_parcelas" placeholder="Ex: 280"></div>
+            <div class="field"><label>Índice de correção</label><select id="fin_indice"><option>TR</option><option>IPCA</option><option>Prefixado</option><option>Outro</option></select></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Possui consórcio ativo?<span class="req">*</span></label>
+      <div class="options-grid-2">
+        <label class="opt-item"><input type="radio" name="tem_cons" value="Sim"><span class="opt-label">Sim</span></label>
+        <label class="opt-item"><input type="radio" name="tem_cons" value="Não"><span class="opt-label">Não</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Detalhes do consórcio<span class="opt">(se aplicável)</span></label>
+      <textarea id="cons_detalhe" placeholder="Administradora, bem contemplado, valor do crédito, parcela atual, parcelas restantes, índice de reajuste. Pretende dar lance?"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Outras dívidas relevantes<span class="opt">(opcional)</span></label>
+      <textarea id="outras_div" placeholder="Ex: Financiamento de veículo R$ 45k, parcela R$ 1.200/mês&#10;Cartão de crédito R$ 8k"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 6 — PATRIMÔNIO ══ -->
+<div class="section-card" id="sec-6">
+  <div class="section-header">
+    <div class="sh-num">06</div>
+    <div class="sh-body">
+      <div class="sh-title">Patrimônio e Investimentos</div>
+      <div class="sh-subtitle">Imóveis, veículos, empresa e recursos financeiros</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="field">
+      <label>Imóveis<span class="opt">(opcional)</span></label>
+      <div class="repeat-group" id="imoveis-list">
+        <div class="repeat-item">
+          <div class="field-row field-row-3">
+            <div class="field"><label>Descrição / uso</label><input type="text" placeholder="Ex: Residência / Aluguel"></div>
+            <div class="field"><label>Localização</label><input type="text" placeholder="Ex: Vitória – ES"></div>
+            <div class="field"><label>Valor de mercado (R$)</label><input type="number" placeholder="Ex: 1200000"></div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="add-btn" onclick="addImovel()">+ Adicionar imóvel</button>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Veículo 1 (modelo / ano)<span class="opt">(opcional)</span></label>
+        <input type="text" id="veiculo1" placeholder="Ex: Toyota Corolla 2022">
+      </div>
+      <div class="field">
+        <label>Valor de mercado (R$)<span class="opt">(opcional)</span></label>
+        <input type="number" id="veiculo1_val" placeholder="Ex: 130000">
+      </div>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Veículo 2 (modelo / ano)<span class="opt">(opcional)</span></label>
+        <input type="text" id="veiculo2" placeholder="Ex: Jeep Compass 2021">
+      </div>
+      <div class="field">
+        <label>Valor de mercado (R$)<span class="opt">(opcional)</span></label>
+        <input type="number" id="veiculo2_val" placeholder="Ex: 110000">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Participações societárias / empresas<span class="opt">(opcional)</span></label>
+      <textarea id="empresas" placeholder="Ex: Ferreira Indústrias Ltda. — 50% participação — valor estimado R$ 2,5M"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Recursos financeiros atuais<span class="req">*</span></label>
+      <div class="repeat-group" id="recursos-list">
+        <div class="repeat-item">
+          <div class="field-row field-row-3">
+            <div class="field"><label>Instituição</label><input type="text" placeholder="Ex: XP Investimentos"></div>
+            <div class="field"><label>Tipo de aplicação</label><input type="text" placeholder="Ex: Renda Fixa, FIIs"></div>
+            <div class="field"><label>Valor (R$)</label><input type="number" placeholder="Ex: 350000"></div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="add-btn" onclick="addRecurso()">+ Adicionar instituição</button>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Aporte mensal em previdência (R$)<span class="opt">(opcional)</span></label>
+        <input type="number" id="aporte_prev" placeholder="Ex: 3000">
+      </div>
+      <div class="field">
+        <label>Aportes futuros previstos<span class="opt">(opcional)</span></label>
+        <input type="text" id="aporte_fut" placeholder="Ex: Venda de imóvel R$ 500k em 2026">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 7 — SEGUROS ══ -->
+<div class="section-card" id="sec-7">
+  <div class="section-header">
+    <div class="sh-num">07</div>
+    <div class="sh-body">
+      <div class="sh-title">Seguros e Proteção</div>
+      <div class="sh-subtitle">Seguro de vida e outras coberturas</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="field">
+      <label>Situação do seguro de vida<span class="req">*</span></label>
+      <div class="options-grid">
+        <label class="opt-item"><input type="radio" name="seguro" value="Não possuo"><span class="opt-label">Não possuo seguro de vida.</span></label>
+        <label class="opt-item"><input type="radio" name="seguro" value="Possuo — informarei os dados"><span class="opt-label">Possuo — informarei os dados abaixo.</span></label>
+        <label class="opt-item"><input type="radio" name="seguro" value="Possuo — enviarei apólice"><span class="opt-label">Possuo — enviarei as apólices em PDF ao assessor.</span></label>
+      </div>
+    </div>
+
+    <div class="field-row field-row-3">
+      <div class="field">
+        <label>Seguradora<span class="opt">(se possui)</span></label>
+        <input type="text" id="seg_seguradora" placeholder="Ex: Zurich, Prudential">
+      </div>
+      <div class="field">
+        <label>Capital segurado (R$)<span class="opt">(se possui)</span></label>
+        <input type="number" id="seg_capital" placeholder="Ex: 1500000">
+      </div>
+      <div class="field">
+        <label>Prêmio mensal (R$)<span class="opt">(se possui)</span></label>
+        <input type="number" id="seg_premio" placeholder="Ex: 680">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Outros seguros que possui<span class="opt">(opcional)</span></label>
+      <div class="options-grid-2">
+        <label class="opt-item"><input type="checkbox" value="Saúde"><span class="opt-label">Seguro Saúde</span></label>
+        <label class="opt-item"><input type="checkbox" value="Residencial"><span class="opt-label">Seguro Residencial</span></label>
+        <label class="opt-item"><input type="checkbox" value="Veículo"><span class="opt-label">Seguro de Veículo</span></label>
+        <label class="opt-item"><input type="checkbox" value="DIT"><span class="opt-label">Seguro de Renda (DIT/DI)</span></label>
+        <label class="opt-item"><input type="checkbox" value="Previdência empresarial"><span class="opt-label">Previdência Empresarial</span></label>
+        <label class="opt-item"><input type="checkbox" value="Nenhum outro"><span class="opt-label">Nenhum outro</span></label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 8 — APOSENTADORIA ══ -->
+<div class="section-card" id="sec-8">
+  <div class="section-header">
+    <div class="sh-num">08</div>
+    <div class="sh-body">
+      <div class="sh-title">Planejamento de Aposentadoria</div>
+      <div class="sh-subtitle">Metas, previdência e projeções</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Idade desejada para aposentadoria<span class="req">*</span></label>
+        <input type="number" id="idade_apos" placeholder="Ex: 65">
+      </div>
+      <div class="field">
+        <label>Renda mensal desejada na aposentadoria (R$)<span class="req">*</span></label>
+        <input type="number" id="renda_apos" placeholder="Ex: 20000">
+        <span class="field-hint">Informe em valores de hoje.</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Situação do INSS<span class="req">*</span></label>
+      <div class="options-grid-2">
+        <label class="opt-item"><input type="radio" name="inss_sit" value="Contribuo regularmente"><span class="opt-label">Contribuo regularmente</span></label>
+        <label class="opt-item"><input type="radio" name="inss_sit" value="Contribuo de forma irregular"><span class="opt-label">Contribuo irregularmente</span></label>
+        <label class="opt-item"><input type="radio" name="inss_sit" value="Não contribuo"><span class="opt-label">Não contribuo</span></label>
+        <label class="opt-item"><input type="radio" name="inss_sit" value="Regime Próprio (RPPS)"><span class="opt-label">Regime Próprio (RPPS)</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Previdência privada<span class="req">*</span></label>
+      <div class="options-grid-2">
+        <label class="opt-item"><input type="radio" name="prev" value="Não possuo"><span class="opt-label">Não possuo</span></label>
+        <label class="opt-item"><input type="radio" name="prev" value="PGBL"><span class="opt-label">PGBL</span></label>
+        <label class="opt-item"><input type="radio" name="prev" value="VGBL"><span class="opt-label">VGBL</span></label>
+        <label class="opt-item"><input type="radio" name="prev" value="PGBL e VGBL"><span class="opt-label">Ambos (PGBL e VGBL)</span></label>
+      </div>
+    </div>
+
+    <div class="field-row field-row-2">
+      <div class="field">
+        <label>Saldo acumulado em previdência (R$)<span class="opt">(opcional)</span></label>
+        <input type="number" id="prev_saldo" placeholder="Ex: 210000">
+      </div>
+      <div class="field">
+        <label>Planeja residir fora do Brasil?<span class="opt">(opcional)</span></label>
+        <select id="exterior">
+          <option value="">Selecione...</option>
+          <option>Não</option>
+          <option>Sim — já tenho destino em mente</option>
+          <option>Talvez, estou considerando</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 9 — OBJETIVOS ══ -->
+<div class="section-card" id="sec-9">
+  <div class="section-header">
+    <div class="sh-num">09</div>
+    <div class="sh-body">
+      <div class="sh-title">Objetivos de Vida e Considerações Finais</div>
+      <div class="sh-subtitle">Projetos, prioridades e expectativas</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="field">
+      <label>Projetos de vida que deseja planejar<span class="opt">(selecione todos que se aplicam)</span></label>
+      <div class="options-grid-2">
+        <label class="opt-item"><input type="checkbox" value="Troca de veículo"><span class="opt-label">Troca de veículo</span></label>
+        <label class="opt-item"><input type="checkbox" value="Viagem / intercâmbio"><span class="opt-label">Viagem / intercâmbio</span></label>
+        <label class="opt-item"><input type="checkbox" value="Reforma / decoração"><span class="opt-label">Reforma / decoração</span></label>
+        <label class="opt-item"><input type="checkbox" value="Compra de imóvel"><span class="opt-label">Compra de imóvel</span></label>
+        <label class="opt-item"><input type="checkbox" value="Educação dos filhos"><span class="opt-label">Educação dos filhos</span></label>
+        <label class="opt-item"><input type="checkbox" value="Abertura / expansão de empresa"><span class="opt-label">Abertura / expansão de empresa</span></label>
+        <label class="opt-item"><input type="checkbox" value="Independência financeira antecipada"><span class="opt-label">Independência financeira antecipada</span></label>
+        <label class="opt-item"><input type="checkbox" value="Planejamento sucessório"><span class="opt-label">Planejamento sucessório</span></label>
+        <label class="opt-item"><input type="checkbox" value="Residência no exterior"><span class="opt-label">Residência no exterior</span></label>
+        <label class="opt-item"><input type="checkbox" value="Blindagem patrimonial"><span class="opt-label">Blindagem patrimonial</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Descreva seus principais objetivos com custo e prazo<span class="opt">(opcional)</span></label>
+      <textarea id="obj_detalhe" placeholder="Ex: Comprar apartamento na praia até 2029, valor estimado R$ 650 mil.&#10;Fazer viagem internacional a cada 2 anos, custo ~R$ 30 mil por viagem."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Declaração de Imposto de Renda<span class="req">*</span></label>
+      <div class="options-grid-2">
+        <label class="opt-item"><input type="radio" name="ir" value="Simplificada"><span class="opt-label">Declaração simplificada</span></label>
+        <label class="opt-item"><input type="radio" name="ir" value="Completa"><span class="opt-label">Declaração completa (com deduções)</span></label>
+        <label class="opt-item"><input type="radio" name="ir" value="Não declaro / isento"><span class="opt-label">Não declaro / isento</span></label>
+        <label class="opt-item"><input type="radio" name="ir" value="Tenho contador"><span class="opt-label">Tenho contador responsável</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Interesse em holding patrimonial?<span class="opt">(opcional)</span></label>
+      <div class="options-grid">
+        <label class="opt-item"><input type="radio" name="holding" value="Não tenho interesse"><span class="opt-label">Não possuo e não tenho interesse no momento.</span></label>
+        <label class="opt-item"><input type="radio" name="holding" value="Possuo holding"><span class="opt-label">Possuo holding patrimonial.</span></label>
+        <label class="opt-item"><input type="radio" name="holding" value="Tenho interesse em avaliar"><span class="opt-label">Tenho interesse em avaliar a criação de uma holding.</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Informações adicionais<span class="opt">(opcional)</span></label>
+      <textarea id="obs" placeholder="Qualquer informação que considere importante para o planejamento financeiro."></textarea>
+    </div>
+
+    <div class="field">
+      <label>O que você espera deste trabalho?<span class="opt">(opcional)</span></label>
+      <textarea id="expectativas" placeholder="Quais são seus principais medos e preocupações financeiras? O que você espera como resultado?"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="success-screen" id="success">
+  <div class="success-icon">✓</div>
+  <div class="success-title">Questionário concluído!</div>
+  <div class="success-text">
+    Tudo certo! Seus dados foram organizados e estão prontos para enviar ao seu assessor.<br>
+    Escolha como prefere enviar:
+  </div>
+
+  <!-- BOTÕES DE ENVIO -->
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:440px;margin:0 auto 28px">
+
+    <!-- WhatsApp -->
+    <button class="send-btn send-whatsapp" onclick="enviarWhatsApp()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Enviar pelo WhatsApp para Rodrigo
+    </button>
+
+    <!-- Copiar texto -->
+    <button class="send-btn send-copy" id="btn-copy" onclick="copiarResultado()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">
+        <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+      </svg>
+      Copiar dados (colar no WhatsApp / e-mail)
+    </button>
+
+    <!-- E-mail -->
+    <button class="send-btn send-email" onclick="enviarEmail()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+      </svg>
+      Enviar por e-mail
+    </button>
+
+  </div>
+
+  <!-- Dados organizados (colapsável) -->
+  <div style="max-width:560px;margin:0 auto">
+    <button onclick="toggleDados()" style="background:none;border:1px solid var(--g2);border-radius:6px;padding:8px 16px;font-size:12px;color:var(--g4);cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:10px">
+      Ver / ocultar dados preenchidos
+    </button>
+    <div id="dados-wrap" style="display:none">
+      <div class="copy-box" id="resultado-texto"></div>
+    </div>
+  </div>
+
+  <!-- Aviso LGPD -->
+  <div style="max-width:480px;margin:24px auto 0;font-size:11px;color:var(--g3);line-height:1.6">
+    Seus dados serão utilizados exclusivamente para fins de planejamento financeiro personalizado, em conformidade com a LGPD (Lei 13.709/2018).
+  </div>
+</div>
+
+<!-- NAV BAR -->
+<div class="nav-bar" id="nav-bar">
+  <button class="btn btn-secondary" id="btn-prev" onclick="prevSection()" style="display:none">← Anterior</button>
+  <div class="steps-dots" id="steps-dots"></div>
+  <button class="btn btn-primary" id="btn-next" onclick="nextSection()">Próximo →</button>
+</div>
+
+</div><!-- end container -->
+
+<script>
+const TOTAL = 9;
+let current = 1;
+
+// Render dots
+function renderDots() {
+  const dots = document.getElementById('steps-dots');
+  dots.innerHTML = '';
+  for(let i=1;i<=TOTAL;i++){
+    const d = document.createElement('div');
+    d.className = 'dot' + (i===current?' active':i<current?' done':'');
+    d.onclick = () => goTo(i);
+    dots.appendChild(d);
+  }
+}
+
+function updateProgress() {
+  const pct = Math.round((current/TOTAL)*100);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-label').textContent = `Seção ${current} de ${TOTAL}`;
+  document.getElementById('btn-prev').style.display = current===1?'none':'block';
+  const btnNext = document.getElementById('btn-next');
+  if(current===TOTAL){
+    btnNext.textContent = 'Finalizar e ver resultado ✓';
+    btnNext.className = 'btn btn-submit';
+  } else {
+    btnNext.textContent = 'Próximo →';
+    btnNext.className = 'btn btn-primary';
+  }
+}
+
+function goTo(n) {
+  document.getElementById('sec-'+current)?.classList.remove('active');
+  current = n;
+  document.getElementById('sec-'+current)?.classList.add('active');
+  renderDots();
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextSection() {
+  if(current < TOTAL) goTo(current+1);
+  else finalizar();
+}
+function prevSection() {
+  if(current > 1) goTo(current-1);
+}
+
+// Add rows
+function addFilho() {
+  const list = document.getElementById('filhos-list');
+  const item = document.createElement('div');
+  item.className = 'repeat-item';
+  item.innerHTML = `<button class="repeat-remove" onclick="this.parentElement.remove()">✕</button>
+    <div class="field-row field-row-3">
+      <div class="field"><label>Nome</label><input type="text" placeholder="Ex: Ana"></div>
+      <div class="field"><label>Data de nasc.</label><input type="date"></div>
+      <div class="field"><label>Parentesco</label><select><option>Filho(a)</option><option>Enteado(a)</option><option>Outro</option></select></div>
+    </div>`;
+  list.appendChild(item);
+}
+
+function addReceita() {
+  const list = document.getElementById('receitas-list');
+  const item = document.createElement('div');
+  item.className = 'repeat-item';
+  item.innerHTML = `<button class="repeat-remove" onclick="this.parentElement.remove()">✕</button>
+    <div class="field-row field-row-3">
+      <div class="field"><label>Tipo de receita</label><input type="text" placeholder="Ex: Aluguel"></div>
+      <div class="field"><label>Valor bruto (R$)</label><input type="number" placeholder="Ex: 4000"></div>
+      <div class="field"><label>Periodicidade</label><select><option>Mensal</option><option>Anual</option><option>Trimestral</option><option>Variável</option></select></div>
+    </div>`;
+  list.appendChild(item);
+}
+
+function addImovel() {
+  const list = document.getElementById('imoveis-list');
+  const item = document.createElement('div');
+  item.className = 'repeat-item';
+  item.innerHTML = `<button class="repeat-remove" onclick="this.parentElement.remove()">✕</button>
+    <div class="field-row field-row-3">
+      <div class="field"><label>Descrição / uso</label><input type="text" placeholder="Ex: Aluguel"></div>
+      <div class="field"><label>Localização</label><input type="text" placeholder="Ex: São Paulo – SP"></div>
+      <div class="field"><label>Valor de mercado (R$)</label><input type="number" placeholder="Ex: 800000"></div>
+    </div>`;
+  list.appendChild(item);
+}
+
+function addRecurso() {
+  const list = document.getElementById('recursos-list');
+  const item = document.createElement('div');
+  item.className = 'repeat-item';
+  item.innerHTML = `<button class="repeat-remove" onclick="this.parentElement.remove()">✕</button>
+    <div class="field-row field-row-3">
+      <div class="field"><label>Instituição</label><input type="text" placeholder="Ex: BTG Pactual"></div>
+      <div class="field"><label>Tipo de aplicação</label><input type="text" placeholder="Ex: Ações / FIIs"></div>
+      <div class="field"><label>Valor (R$)</label><input type="number" placeholder="Ex: 200000"></div>
+    </div>`;
+  list.appendChild(item);
+}
+
+// Final — gerar texto para copiar
+function finalizar() {
+  const g = id => document.getElementById(id)?.value || '—';
+  const radio = name => document.querySelector(`input[name="${name}"]:checked`)?.value || '—';
+  const checks = name => [...document.querySelectorAll(`input[type="checkbox"][value]:checked`)].map(x=>x.value).join(', ') || '—';
+
+  // Receitas
+  const recItems = [...document.getElementById('receitas-list').querySelectorAll('.repeat-item')].map(item=>{
+    const ins = item.querySelectorAll('input,select');
+    return `${ins[0]?.value||'—'} — R$ ${ins[1]?.value||'—'}/mês (${ins[2]?.value||'—'})`;
+  }).join('\n  ');
+
+  // Filhos
+  const filhos = [...document.getElementById('filhos-list').querySelectorAll('.repeat-item')].map(item=>{
+    const ins = item.querySelectorAll('input,select');
+    return `${ins[0]?.value||'—'}, nasc. ${ins[1]?.value||'—'} (${ins[2]?.value||'—'})`;
+  }).join('\n  ');
+
+  // Imóveis
+  const imoveis = [...document.getElementById('imoveis-list').querySelectorAll('.repeat-item')].map(item=>{
+    const ins = item.querySelectorAll('input');
+    return `${ins[0]?.value||'—'} — ${ins[1]?.value||'—'} — R$ ${ins[2]?.value||'—'}`;
+  }).join('\n  ');
+
+  // Recursos
+  const recursos = [...document.getElementById('recursos-list').querySelectorAll('.repeat-item')].map(item=>{
+    const ins = item.querySelectorAll('input');
+    return `${ins[0]?.value||'—'} — ${ins[1]?.value||'—'} — R$ ${ins[2]?.value||'—'}`;
+  }).join('\n  ');
+
+  const outros_seguros = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(x=>x.value).join(', ') || '—';
+
+  const texto = `══════════════════════════════════════════
+FINANCIAL PLANNING — CRITERIA FINANCIAL GROUP
+Questionário preenchido em: ${new Date().toLocaleDateString('pt-BR')}
+Assessor: Estevão Foletto · ANCORD A38282
+══════════════════════════════════════════
+
+── 01. DADOS PESSOAIS ──────────────────────
+Nome completo:    ${g('nome')}
+Data nascimento:  ${g('nascimento')}
+CPF:              ${g('cpf')}
+Estado civil:     ${g('estado_civil')}
+Telefone:         ${g('telefone')}
+E-mail:           ${g('email')}
+Cidade/Estado:    ${g('cidade')}
+Profissão:        ${g('profissao')}
+Empresa:          ${g('empresa')}
+Regime:           ${g('regime')}
+Renda bruta:      R$ ${g('renda')}/mês
+Perfil de risco:  ${radio('perfil')}
+
+── 02. CÔNJUGE E DEPENDENTES ───────────────
+Cônjuge:          ${g('conjuge_nome')}
+Nasc. cônjuge:    ${g('conjuge_nasc')}
+Profissão cônjuge:${g('conjuge_prof')}
+Renda cônjuge:    R$ ${g('conjuge_renda')}/mês
+Dependentes:
+  ${filhos || '—'}
+
+── 03. RECEITAS ────────────────────────────
+Rendas ativas:
+  ${recItems || '—'}
+Receitas passivas: ${g('rec_passiva')}
+INSS estimado:    R$ ${g('inss')}/mês
+Outras receitas:  ${g('outras_rec')}
+
+── 04. DESPESAS MENSAIS ────────────────────
+Moradia:          R$ ${g('desp_moradia')}
+Alimentação:      R$ ${g('desp_alim')}
+Transporte:       R$ ${g('desp_transp')}
+Saúde:            R$ ${g('desp_saude')}
+Educação:         R$ ${g('desp_educ')}
+Tel/Internet:     R$ ${g('desp_tele')}
+Funcionários:     R$ ${g('desp_dom')}
+Outras fixas:     R$ ${g('desp_outras')}
+Variáveis/lazer:  R$ ${g('desp_var')}/mês
+Desp. temporárias:${g('desp_temp')}
+
+── 05. FINANCIAMENTOS ──────────────────────
+Financiamento imobiliário: ${radio('tem_financ')}
+  Banco:          ${g('fin_banco')}
+  Saldo devedor:  R$ ${g('fin_saldo')}
+  Parcela atual:  R$ ${g('fin_parcela')}/mês
+  Taxa de juros:  ${g('fin_taxa')}% a.a.
+  Parcelas rest.: ${g('fin_parcelas')}
+  Índice:         ${g('fin_indice')}
+Consórcio: ${radio('tem_cons')}
+  ${g('cons_detalhe')}
+Outras dívidas: ${g('outras_div')}
+
+── 06. PATRIMÔNIO E INVESTIMENTOS ──────────
+Imóveis:
+  ${imoveis || '—'}
+Veículo 1:        ${g('veiculo1')} — R$ ${g('veiculo1_val')}
+Veículo 2:        ${g('veiculo2')} — R$ ${g('veiculo2_val')}
+Empresas/Soc.:    ${g('empresas')}
+Recursos financeiros:
+  ${recursos || '—'}
+Aporte prev.:     R$ ${g('aporte_prev')}/mês
+Aportes futuros:  ${g('aporte_fut')}
+
+── 07. SEGUROS ─────────────────────────────
+Seguro de vida:   ${radio('seguro')}
+  Seguradora:     ${g('seg_seguradora')}
+  Capital segur.: R$ ${g('seg_capital')}
+  Prêmio mensal:  R$ ${g('seg_premio')}/mês
+Outros seguros:   ${outros_seguros}
+
+── 08. APOSENTADORIA ───────────────────────
+Idade aposentad.: ${g('idade_apos')} anos
+Renda desejada:   R$ ${g('renda_apos')}/mês
+INSS:             ${radio('inss_sit')}
+Previdência priv.:${radio('prev')}
+  Saldo acum.:    R$ ${g('prev_saldo')}
+Residir exterior: ${g('exterior')}
+
+── 09. OBJETIVOS E CONSIDERAÇÕES ───────────
+Projetos de vida: ${outros_seguros}
+  ${g('obj_detalhe')}
+Declaração IR:    ${radio('ir')}
+Holding patr.:    ${radio('holding')}
+Observações:      ${g('obs')}
+Expectativas:     ${g('expectativas')}
+
+══════════════════════════════════════════
+Fim do questionário
+══════════════════════════════════════════`;
+
+  document.getElementById('resultado-texto').textContent = texto;
+
+  // Esconder sections e nav
+  for(let i=1;i<=TOTAL;i++) document.getElementById('sec-'+i)?.classList.remove('active');
+  document.getElementById('nav-bar').style.display = 'none';
+  document.getElementById('success').classList.add('show');
+  window.scrollTo({top:200,behavior:'smooth'});
+}
+
+function copiarResultado() {
+  const txt = document.getElementById('resultado-texto').textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn = document.getElementById('btn-copy');
+    const original = btn.innerHTML;
+    btn.innerHTML = btn.innerHTML.replace('Copiar dados (colar no WhatsApp / e-mail)', '✓ Copiado! Agora cole no WhatsApp ou e-mail.');
+    btn.style.background = '#1E7D4F';
+    setTimeout(()=>{ btn.innerHTML = original; btn.style.background = ''; }, 3000);
+  });
+}
+
+function enviarWhatsApp() {
+  const txt = document.getElementById('resultado-texto').textContent;
+  const msg = encodeURIComponent(txt.substring(0, 4000)); // WhatsApp limit
+  const numero = '5527995009218'; // Rodrigo com código do país
+  window.open(`https://wa.me/${numero}?text=${msg}`, '_blank');
+}
+
+function enviarEmail() {
+  const txt = document.getElementById('resultado-texto').textContent;
+  const assunto = encodeURIComponent('Financial Planning — Questionário Preenchido');
+  const corpo = encodeURIComponent(txt.substring(0, 8000));
+  window.location.href = `mailto:estevao.foletto@criteriainvest.com.br?subject=${assunto}&body=${corpo}`;
+}
+
+function toggleDados() {
+  const wrap = document.getElementById('dados-wrap');
+  wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+}
+
+// Init
+renderDots();
+updateProgress();
+</script>
+</body>
+</html>
